@@ -1,0 +1,47 @@
+{
+ "individuals" : [ {
+
+        "memberID" : "140887",
+        "firstname" : "Johnny",
+        "lastname" : "Bravo",
+        "memberStatus":"false"
+    },
+    {
+        "memberID" :"140978",
+        "firstname":"Stephanie",
+        "lastname":"Rubrix",
+        "memberStatus":"true"
+    },
+    {
+        "memberID":"120098",
+        "firstname":"Kacy",
+        "lastname":"Stucco",
+        "memberStatus":"true"
+    }
+
+],
+
+
+    "organizations" :[
+    {
+        "orgID":"000324",
+        "businessName":"Pizza and Co",
+        "active":"true"
+        
+    },
+    {
+        "orgID":"000125",
+        "businessName":"Speech and Stuff",
+        "active":"true"
+    },
+    {
+        "orgID":"000278",
+        "businessName":"The Spot",
+        "active":"false"
+    }
+]
+
+}
+
+
+

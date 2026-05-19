@@ -1,10 +1,19 @@
+"use client";
+
+import Sidebar from "@/components/layout/Sidebar";
 import { navigate } from "next/dist/client/components/segment-cache/navigation";
+import Button from "@/components/Button";
 
-//This Page should show membership top level membership information and allow interanl employee to interact with information
+//This Page is displaying a membership profile
 
-export default function memberView () {
+export default function Memberview () {
     return (
         <div>
+            <div className="flex-row">
+                <div>
+                    <Sidebar />
+                </div>
+            <div>
             <div>
             <p className="bg-blue-300 text-2xl text-center">Membership Profile</p>
             </div>
@@ -14,12 +23,16 @@ export default function memberView () {
                 <p>Certification Status:</p>
             </div>
             <div>
-                <button 
-                className="bg-blue-500 text-white rounded p-2"
+                
+                <Button
+                label="Edit Member information"
+                variant="primary"
+                onClick= {()=> void 0}
                 >
-                    Edit Member Information</button>
+                </Button>
             </div>
-
+            </div>
+        </div>
         </div>
     )
 } 
