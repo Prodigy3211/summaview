@@ -1,22 +1,34 @@
-import Form from 'next/form'
-// this form will search for members in the data.json in the lib folder
+import Form from 'next/form';
+// this form will search for members in the database. The local configuration is in the lib folder
 
-export default function MemberSearchForm () {
+// import Link from "next/link";
+// import { pool } from "@/lib/db";
+
+type SearchFormProps = {
+    query: string;
+};
+
+export default async function MemberSearchForm ({
+    query,
+    }: SearchFormProps) {
  
-// interface MemberProps {
-// name: string,
-// membership: boolean,
-
-// }
+ 
 
 // function findIndividual (){
     return(
         <div>
         <div>Individual Search</div>
-        <Form action="/search">
+        <Form action="/crm/member-search">
            <div>
             <div>
-            First Name <input className='border solid 2px' name="query" />
+            First Name 
+            <input
+                type="search"
+                name ="q"
+                defaultValue={query}
+                placeholder="Search Individuals"
+                className='border solid 2px'
+                />
             </div>
             <div>Submit
             <button 
@@ -26,6 +38,14 @@ export default function MemberSearchForm () {
             </div>
             </div>
         </Form>
+
+        {/* {members.map((member) => (
+            <Link key={member.id} href={`/crm/member-search/${member.id}`}>
+                <div>
+                    {member.first_name} {member.last_name} - {member.email}
+                </div>
+            </Link>
+        ))} */}
 
         </div>
     )

@@ -4,15 +4,16 @@ import Sidebar from "@/components/layout/Sidebar";
 import Button from "@/components/Button";
 import { notFound } from "next/navigation";
 import { pool } from "@/lib/db";
+import MemberSearchForm from "@/components/members/MemberSearchForm";
 
 //This Page is displaying a membership profile
 
 export default async function Memberview( {
-    params,
+    searchParams,
 }: {
-    params: Promise <{id: string}>;
+    searchParams: Promise <{id: string}>;
 }) {
-    const {id}  = await params;
+    const {id}  = await searchParams;
 
     const results = await pool.query(
         `SELECT *
