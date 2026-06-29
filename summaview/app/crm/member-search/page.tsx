@@ -38,6 +38,9 @@ export default async function memberList ({
             <h1>
                 Members
             </h1>
+            <Link href="/crm/member-search/new">
+            <h2>Create New Member</h2>
+            </Link>
             <MemberSearchForm query="query" />
             
         {members.map ((member) => (
