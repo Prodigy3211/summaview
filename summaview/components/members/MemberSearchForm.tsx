@@ -21,11 +21,10 @@ export default async function MemberSearchForm ({
         <Form action="/crm/member-search">
            <div>
             <div>
-            First Name 
+            Search: 
             <input
                 type="search"
                 name ="q"
-                defaultValue={query}
                 placeholder="Search Individuals"
                 className='border solid 2px'
                 />

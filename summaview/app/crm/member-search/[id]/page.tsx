@@ -4,6 +4,7 @@ import Sidebar from "@/components/layout/Sidebar";
 import Button from "@/components/Button";
 import { notFound } from "next/navigation";
 import { pool } from "@/lib/db";
+import Link from "next/link";
 
 //This Page is displaying a membership profile
 
@@ -22,7 +23,7 @@ export default async function Memberview( {
     [id]
     )
     
-    const member = results.rows[0];
+    const member = results.rows[0]; //Should probably remove the sql here and use getMembersbyId
 
     if(!member) notFound();
 
@@ -38,8 +39,15 @@ export default async function Memberview( {
             </div>
             <div>
                 <p>Name: {member.first_name} {member.last_name}</p>
-                <p>Membership Status:</p>
-                <p>Certification Status:</p>
+                <p>Membership Status:{member.status}</p>
+                <p>Member Email: {member.email}</p>
+                <p>Member Phone Number: {member.phone}</p>
+
+            </div>
+            <div>
+                <Link href={`/crm/member-search/${member.id}/edit`}>
+                Edit Member
+                </Link>
             </div>
             <div>
                 

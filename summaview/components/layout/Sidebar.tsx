@@ -5,14 +5,14 @@ export default function Sidebar (){
     return(
         <div className="flex flex-col">
             <div>
-                <Link href={"/Individuals"}>Individuals</Link>
+                <Link href={"/crm/member-search"}>Individuals</Link>
             </div>
             <div>
-                <Link href={"/Organizations"}>Organizations</Link>
+                <Link href={"/crm/member-search"}>Organizations</Link>
             </div>
-            <div>
+            {/* <div>
                 <Link href={"/Certificationmaintenance"}>Certification Maintenance</Link>
-            </div>
+            </div> */}
         </div>
     )
 }
