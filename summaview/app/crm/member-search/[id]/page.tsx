@@ -7,7 +7,7 @@ import Link from "next/link";
 import { requestMemberArchive } from "@/lib/members";
 import { getMembersById } from "@/lib/members";
 
-//This Page is displaying a membership profile
+//This Page is displaying a mebership profile
 
 export default async function Memberview( {
     params,
