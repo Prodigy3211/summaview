@@ -2,9 +2,10 @@
 
 import Sidebar from "@/components/layout/Sidebar";
 import Button from "@/components/Button";
-import { notFound } from "next/navigation";
-import { pool } from "@/lib/db";
+import { notFound, redirect } from "next/navigation";
 import Link from "next/link";
+import { requestMemberArchive } from "@/lib/members";
+import { getMembersById } from "@/lib/members";
 
 //This Page is displaying a membership profile
 
@@ -15,17 +16,27 @@ export default async function Memberview( {
 }) {
     const {id}  = await params;
 
-    const results = await pool.query(
-        `SELECT *
-        FROM members
-        WHERE id = $1
-        `,
-    [id]
-    )
+    // const results = await pool.query(
+    //     `SELECT *
+    //     FROM members
+    //     WHERE id = $1
+    //     `,
+    // [id]
+    // )
+
     
-    const member = results.rows[0]; //Should probably remove the sql here and use getMembersbyId
+    const member = await getMembersById(id); //Should probably remove the sql here and use getMembersbyId
 
     if(!member) notFound();
+
+//Use the server to request an archive for this profile
+    async function requestArchiveAction(){
+        "use server";
+        
+        await requestMemberArchive(id);
+
+        redirect(`/crm/member-search/${id}`);
+    }
 
     return (
         <div>
@@ -48,6 +59,21 @@ export default async function Memberview( {
                 <Link href={`/crm/member-search/${member.id}/edit`}>
                 Edit Member
                 </Link>
+            </div>
+            <form action={requestArchiveAction}>
+                <button type="submit">
+                    Request Archive
+                </button>
+            </form>
+            <div>
+                {member.archive_requested && !member.archived && (
+        <p>Archive request pending admin approval.</p>
+    )
+    }
+
+    {member.archived && (
+        <p>This Member Has been Archived</p>
+    )}
             </div>
             <div>
                 

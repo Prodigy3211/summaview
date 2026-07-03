@@ -3,9 +3,13 @@ import {pool} from "@/lib/db";
 
 // Get all the members
 
-export async function getMembers(query: string ="") {
-    const search = `%${query}`;
-    const result = query ? await pool.query(`
+export async function getMembers(query: string ="") {    
+    const trimmedQuery = query.trim();
+
+    if(trimmedQuery){
+    const search = `%${trimmedQuery}%`;
+
+    const result = await pool.query(`
         SELECT id, first_name, last_name, email, phone, status
         FROM members
         WHERE first_name ILIKE $1
@@ -13,11 +17,14 @@ export async function getMembers(query: string ="") {
             OR email ILIKE $1
             OR phone ILIKE $1
             OR status ILIKE $1
+            OR CONCAT(first_name, ' ', last_name) ILIKE $1
         ORDER BY last_name ASC`,
         [search]
-    )
+    );
+    return result.rows;
+}
 
-: await pool.query(
+const result = await pool.query(
     `
     SELECT id, first_name, last_name, phone, email, status
     FROM members
@@ -32,7 +39,11 @@ export async function getMembers(query: string ="") {
 export async function getMembersById(id: string) {
     const result = await pool.query(
         `
-        SELECT id, first_name, last_name, email, phone, status
+        SELECT id, first_name, last_name, email, phone, status,
+        archive_requested,
+        archive_requested_at,
+        archived,
+        archived_at
         FROM members
         WHERE id = $1
         `,
@@ -106,6 +117,43 @@ export async function updateMember(id: string, member: UpdateMember) {
             member.status,
             id,
         ]
+    );
+    return result.rows[0];
+}
+
+
+//Soft Delete (Request an Admin to archive a member)
+
+export async function requestMemberArchive(id:string) {
+    const result = await pool.query(
+        `
+        UPDATE members
+        SET
+           archive_requested = true,
+           archive_requested_at = NOW()
+        WHERE id = $1
+        RETURNING id, first_name, last_name, email, archive_requested,
+        archive_requested_at
+        `,
+        [id]
+    );
+    return result.rows[0]; 
+}
+
+//Admin Approval of archive request
+
+export async function approveMemberArchive(id: string) {
+    const result = await pool.query(
+        `
+        UPDATE members
+        SET
+            archived = true,
+            archived_at = NOW()
+            WHERE id = $1
+            RETURNING id, first_name, last_name, email, archived,
+            archived_at
+            `,
+            [id]
     );
     return result.rows[0];
 }

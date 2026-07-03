@@ -88,10 +88,10 @@ return (
                 />
             </div>
              <div>
-                <label htmlFor="firstName">First Name</label>
+                <label htmlFor="phone">Phone</label>
                 <input
-                    id="firstName"
-                    name="firstName"
+                    id="phone"
+                    name="phone"
                     type="tel"
                     defaultValue={member.phone ?? ""}
                 />
@@ -114,7 +114,6 @@ return (
             <button type="submit"> Save Changes</button>
 
         </form>
-
     </main>
 )
 
