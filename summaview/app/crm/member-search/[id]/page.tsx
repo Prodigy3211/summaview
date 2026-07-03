@@ -3,7 +3,6 @@
 import Sidebar from "@/components/layout/Sidebar";
 import Button from "@/components/Button";
 import { notFound, redirect } from "next/navigation";
-import { pool } from "@/lib/db";
 import Link from "next/link";
 import { requestMemberArchive } from "@/lib/members";
 import { getMembersById } from "@/lib/members";

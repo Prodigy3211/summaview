@@ -4,8 +4,12 @@ import {pool} from "@/lib/db";
 // Get all the members
 
 export async function getMembers(query: string ="") {    
-    const search = `%${query}%`;
-    const result = query ? await pool.query(`
+    const trimmedQuery = query.trim();
+
+    if(trimmedQuery){
+    const search = `%${trimmedQuery}%`;
+
+    const result = await pool.query(`
         SELECT id, first_name, last_name, email, phone, status
         FROM members
         WHERE first_name ILIKE $1
@@ -13,11 +17,14 @@ export async function getMembers(query: string ="") {
             OR email ILIKE $1
             OR phone ILIKE $1
             OR status ILIKE $1
+            OR CONCAT(first_name, ' ', last_name) ILIKE $1
         ORDER BY last_name ASC`,
         [search]
-    )
+    );
+    return result.rows;
+}
 
-: await pool.query(
+const result = await pool.query(
     `
     SELECT id, first_name, last_name, phone, email, status
     FROM members
