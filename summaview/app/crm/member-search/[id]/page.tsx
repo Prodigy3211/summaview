@@ -40,32 +40,34 @@ export default async function Memberview( {
 
     return (
         <div>
-            <div className="flex-row">
-                <div>
+            <div className="flex flex row m-16">
+                <div className="border-solid border-2 flex-col m-2">
                     <Sidebar />
                 </div>
             <div>
-            <div>
-            <p className="bg-blue-300 text-2xl text-center">Membership Profile</p>
+            <div className="border-solid border-4">
+            <p className="bg-blue-300  text-2xl text-center">Membership Profile</p>
             </div>
-            <div>
+            <div className="border-solid border-2 border-color-green">
                 <p>Name: {member.first_name} {member.last_name}</p>
                 <p>Membership Status:{member.status}</p>
                 <p>Member Email: {member.email}</p>
                 <p>Member Phone Number: {member.phone}</p>
 
             </div>
-            <div>
+            <div className="border-2 border-solid">
                 <Link href={`/crm/member-search/${member.id}/edit`}>
                 Edit Member
                 </Link>
             </div>
+            <div className="border-2 border-solid">
             <form action={requestArchiveAction}>
                 <button type="submit">
                     Request Archive
                 </button>
             </form>
-            <div>
+            </div>
+            <div className="text-color-red">
                 {member.archive_requested && !member.archived && (
         <p>Archive request pending admin approval.</p>
     )
