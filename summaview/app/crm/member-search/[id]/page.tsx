@@ -39,10 +39,12 @@ export default async function Memberview( {
     }
 
     return (
-        <div>
-            <div className="flex flex row m-16">
-                <div className="border-solid border-2 flex-col m-2">
+        
+            <div className="flex flex-col justify-center items-center border-2 border-solid mt-8 mx-24 gap-16 border-green-700 h-max">
+                <div className="flex">
+                    <div>
                     <Sidebar />
+                    </div>
                 </div>
             <div>
             <div className="border-solid border-4">
@@ -88,6 +90,6 @@ export default async function Memberview( {
             </div>
             </div>
         </div>
-        </div>
+        
     )
 } 
