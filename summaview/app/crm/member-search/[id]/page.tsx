@@ -40,28 +40,29 @@ export default async function Memberview( {
 
     return (
         
-            <div className="flex justify-center items-center border-2 border-solid p-6 gap-6 bg-gray-200 border-green-700 w-full min-h-screen">
+            <div className="flex justify-center items-center border-2 border-solid p-6 gap-6 bg-gray-50 border-green-700 w-full min-h-screen">
                 <div>
                 <Sidebar />
                 </div>
                 
-            <div>
-            <div className="border-solid border-4">
-            <p className="bg-blue-300  text-2xl text-center">Membership Profile</p>
+            <div className="flex-1 border-solid border-gray-200 rounded-xl bg-white p-6 shadow-sm">
+            <div> 
+            {/* className="flex-1 border-solid border-gray-200 rounded-xl bg-white p-4 shadow-sm" */}
+            <p className="bg-blue-300 mb-4 text-2xl text-center rounded">Membership Profile</p>
             </div>
-            <div className="border-solid border-2 border-color-green">
-                <p>Name: {member.first_name} {member.last_name}</p>
-                <p>Membership Status:{member.status}</p>
-                <p>Member Email: {member.email}</p>
-                <p>Member Phone Number: {member.phone}</p>
+            <div className="p-2">
+                <h3 className="text-lg font-bold">Name: {member.first_name} {member.last_name}</h3>
+                <p className="text-sm">Membership Status: {member.status}</p>
+                <p className="text-sm">Member Email: {member.email}</p>
+                <p className="text-sm">Member Phone Number: {member.phone}</p>
 
             </div>
-            <div className="border-2 border-solid">
+            <div className="border-2 border-solid rounded-xl text-center bg-blue-300 mb-2 w-40">
                 <Link href={`/crm/member-search/${member.id}/edit`}>
                 Edit Member
                 </Link>
             </div>
-            <div className="border-2 border-solid">
+            <div className="border-2 border-solid text-center rounded-xl bg-red-300 w-40">
             <form action={requestArchiveAction}>
                 <button type="submit">
                     Request Archive
