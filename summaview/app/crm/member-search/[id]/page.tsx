@@ -40,12 +40,11 @@ export default async function Memberview( {
 
     return (
         
-            <div className="flex flex-col justify-center items-center border-2 border-solid mt-8 mx-24 gap-16 border-green-700 h-max">
-                <div className="flex">
-                    <div>
-                    <Sidebar />
-                    </div>
+            <div className="flex justify-center items-center border-2 border-solid p-6 gap-6 bg-gray-200 border-green-700 w-full min-h-screen">
+                <div>
+                <Sidebar />
                 </div>
+                
             <div>
             <div className="border-solid border-4">
             <p className="bg-blue-300  text-2xl text-center">Membership Profile</p>
